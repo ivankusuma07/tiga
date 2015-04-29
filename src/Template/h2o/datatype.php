@@ -1,4 +1,5 @@
 <?php
+
 class StreamWriter {
     var $buffer = array();
     var $close;

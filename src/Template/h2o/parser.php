@@ -1,4 +1,6 @@
 <?php
+
+
 class H2o_Lexer {
     function __construct($options = array()) {
         $this->options = $options;

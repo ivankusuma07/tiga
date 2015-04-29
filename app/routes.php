@@ -6,9 +6,9 @@ Route::get('/halo/php/{kamu:@any}', function($kamu){
 
 });
 
-Route::get('/halo/twig/{kamu:@any}', function($kamu){
+Route::get('/halo/h20/{kamu:@any}', function($kamu){
 	
-	View::make('eringga.twig',array('name'=>$kamu));
+	View::make('eringga.tpl',array('name'=>$kamu));
 
 });
 

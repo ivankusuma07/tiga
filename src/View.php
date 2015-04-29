@@ -10,18 +10,15 @@ class View {
 
 	protected $viewQueues;
 
-	protected $twigRenderer;
-
 	protected $buffer;
 
 
 	function __construct() {
 		
-		$this->run = false;
-		
-		$this->viewQueues = array();
+		// Initilize template system
+		Template::init(LOTUS_VIEW_PATH);
 
-		$this->init();
+		add_filter('template_include', array($this,'overrideTemplate'),10,1);	
 	}
 
 	function setBuffer($buffer) {
@@ -29,29 +26,23 @@ class View {
 	}
 
 	function getBuffer() {
-		return $this->buffer;
-	}
-
-	function process() {
-
-		// Initilize template system
-		Template::init(LOTUS_VIEW_PATH);
-
-		add_filter('template_include', array($this,'overrideTemplate'),10,1);	
 		
+		return $this->buffer;
 	}
 	
 	function make($template,$parameter=array())	{
 
-		$viewQueue = new ViewQueue($template,$parameter);
+		// $viewQueue = new ViewQueue($template,$parameter);
 
-		if(!$this->run) {
-			// add to array;
-			array_push($this->viewQueues,$viewQueue);	
-		}
-		else{
-			Template::render($viewQueue->getTemplate(),$viewQueue->getParameter());
-		}
+		// if(!$this->run) {
+		// 	// add to array;
+		// 	array_push($this->viewQueues,$viewQueue);	
+		// }
+		// else{
+		// echo Template::render($viewQueue->getTemplate(),$viewQueue->getParameter());
+		// }
+		
+		echo Template::render($template,$parameter);
 				
 	}
 
@@ -70,24 +61,4 @@ class View {
 	function overrideTemplate() {
 		return LOTUS_BASE_PATH.'/src/ViewGenerator.php';
 	}
-
-	function init() {
-
-		// Only done once
-		if($this->run)
-			return;
-
-		if(!$this->run) {
-			$run = false;		
-		}
-
-		foreach ($this->viewQueues as $viewQueue) {
-
-			Template::render($viewQueue->getTemplate(),$viewQueue->getParameter());
-		
-		}
-
-	}
-
-
 }

@@ -69,14 +69,12 @@ class Router {
 		        //Transfer buffer to view
 		        $content = ob_get_contents();
 		        ob_end_clean();
-		        
+		      
+
 		        View::setBuffer($content);
 
-		        
-
 		        // Exit WordPress or not to exist after Lotus finish executing
-		       
-
+		        
 		        break;
 		}
 

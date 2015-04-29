@@ -1,13 +1,15 @@
 <?php 
 namespace Lotus\Framework\Template;
 
+include "h2o.php";
+
 use Lotus\Framework\Facade\ApplicationFacade as App;
 
 class Template 
 {
 	private $path;
 
-	private $engine;
+	private $engine=false;
 
 	function init($path) {
 		// Base path location for H20 template
@@ -19,6 +21,8 @@ class Template
 		// Do nothing if h2o engine is already iniziated
 		if($this->engine)
 			return;
+
+
 
 		// Configure H20 cache folder
 		$storage = LOTUS_STORAGE;
@@ -33,9 +37,11 @@ class Template
 		}
 
 		// Create ready to use H20 Engine
-		$this->engine = new H2o(null, array(
+		$this->engine = new \H2o(null, array(
 		    'cache_dir' => LOTUS_STORAGE
 		));
+
+
 	}
 
 	public function renderH20($template,$parameter) {
@@ -43,21 +49,23 @@ class Template
 		$this->initH2o();
 
 		//Final Path
-		$finalPath = $this->path.$template;
+		$finalPath = $this->path."/".$template;
 
-		return $this->engine($render,$parameter);
+		$this->engine->loadTemplate($finalPath);
+
+
+		return $this->engine->render($parameter);
 	}
 
 	public function renderPhp($template,$parameter) {
 		//Final Path
-		$finalPath = $this->path.$template;
+		$finalPath = $this->path."/".$template;
 
-		foreach ($viewQueue->getParameter() as $key => $value) {
+		foreach ($parameter as $key => $value) {
 			${$key} = $value;
 		}
-		ob_start();
-		include $finalPath;
-		return ob_get_contents();
+
+		include $finalPath;		
 	}
 
 	public function render($template,$parameter) {
