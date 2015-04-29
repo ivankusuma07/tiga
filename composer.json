@@ -14,7 +14,9 @@
     {
         "nikic/fast-route": "0.4.*",
         "symfony/http-foundation":"*",
-        "tonjoo/almari":"*"
+        "tonjoo/almari":"*",
+        "aura/sqlquery":"2.*",
+        "gedmo/doctrine-extensions": "~2.3"
     },
     "autoload": 
     {

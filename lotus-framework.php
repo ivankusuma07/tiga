@@ -16,14 +16,12 @@ function lotus_bootstrap() {
 	define( 'LOTUS_BUFFER_CALLBACK','lotus_ob_end' );
 	
 	require "vendor/autoload.php";
+
 	
+	require "app/config/app.php";
 	require "app/bootstrap.php";
 
 	Router::init();
 
-	// global $wp_rewrite;
-
-	// var_dump($wp_rewrite);
-	// die();
 }
 

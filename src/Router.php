@@ -1,6 +1,7 @@
 <?php
 namespace Lotus\Framework;
 use Lotus\Framework\Facade\RoutesFacade as Route;
+use Lotus\Framework\Facade\ViewFacade as View;
 use Lotus\Framework\Facade\RequestFacade as Request;
 use Lotus\Framework\Exception\RoutingException as RoutingException;
 use FastRoute\Dispatcher as Dispatcher;
@@ -65,9 +66,13 @@ class Router {
 		        // Handle request
 		        $this->handle($handler,$vars);
 		        
+		        //Transfer buffer to view
 		        $content = ob_get_contents();
-
 		        ob_end_clean();
+		        
+		        View::setBuffer($content);
+
+		        
 
 		        // Exit WordPress or not to exist after Lotus finish executing
 		       

@@ -9,5 +9,9 @@ class HomeController {
 	function named($name,$id) {
 		var_dump($name);
 		var_dump($id);
+
+		View::Make('eringga.php',$array('name'=>$name));
 	}
+
+
 }
