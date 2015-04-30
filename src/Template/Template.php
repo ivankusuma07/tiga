@@ -16,13 +16,11 @@ class Template
 		$this->path = $path;		
 	}
 
-	function initH2o() {
+	private function initH2o() {
 
 		// Do nothing if h2o engine is already iniziated
 		if($this->engine)
 			return;
-
-
 
 		// Configure H20 cache folder
 		$storage = LOTUS_STORAGE;
@@ -38,18 +36,19 @@ class Template
 
 		// Create ready to use H20 Engine
 		$this->engine = new \H2o(null, array(
-		    'cache_dir' => LOTUS_STORAGE
+		    'cache_dir' => LOTUS_STORAGE,
+		    'searchpath' => $this->path
 		));
 
 
 	}
 
-	public function renderH20($template,$parameter) {
+	private public function renderH20($template,$parameter) {
 
 		$this->initH2o();
 
 		//Final Path
-		$finalPath = $this->path."/".$template;
+		$finalPath = $this->path.$template;
 
 		$this->engine->loadTemplate($finalPath);
 
@@ -57,9 +56,9 @@ class Template
 		return $this->engine->render($parameter);
 	}
 
-	public function renderPhp($template,$parameter) {
+	private public function renderPhp($template,$parameter) {
 		//Final Path
-		$finalPath = $this->path."/".$template;
+		$finalPath = $this->path.$template;
 
 		foreach ($parameter as $key => $value) {
 			${$key} = $value;

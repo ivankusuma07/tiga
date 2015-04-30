@@ -10,7 +10,7 @@ class HomeController {
 		var_dump($name);
 		var_dump($id);
 
-		View::Make('eringga.php',$array('name'=>$name));
+		View::render('eringga.php',$array('name'=>$name));
 	}
 
 

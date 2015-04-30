@@ -29,7 +29,7 @@ class H2o_File_Loader extends H2o_Loader {
         if (!is_array($searchpath))
              throw new Exception("searchpath must be an array");
         
-        
+
 		$this->searchpath = (array) $searchpath;
 		$this->setOptions($options);
     }
@@ -54,6 +54,7 @@ class H2o_File_Loader extends H2o_Loader {
     }
 
 	function get_template_path($search_path, $filename){
+
 
         
         for ($i=0 ; $i < count($search_path) ; $i++) 

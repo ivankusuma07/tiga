@@ -13,13 +13,21 @@ class View {
 	protected $buffer;
 
 
-	function __construct() {
+	function __construct($template,$parameter=array()) {
 		
 		// Initilize template system
 		Template::init(LOTUS_VIEW_PATH);
 
 		add_filter('template_include', array($this,'overrideTemplate'),10,1);	
+
+		echo Template::render($template,$parameter);
 	}
+
+	function make($template,$parameter=array()){
+		return new View($template,$parameter);
+	}
+
+
 
 	function setBuffer($buffer) {
 		$this->buffer = $buffer;
@@ -28,22 +36,6 @@ class View {
 	function getBuffer() {
 		
 		return $this->buffer;
-	}
-	
-	function make($template,$parameter=array())	{
-
-		// $viewQueue = new ViewQueue($template,$parameter);
-
-		// if(!$this->run) {
-		// 	// add to array;
-		// 	array_push($this->viewQueues,$viewQueue);	
-		// }
-		// else{
-		// echo Template::render($viewQueue->getTemplate(),$viewQueue->getParameter());
-		// }
-		
-		echo Template::render($template,$parameter);
-				
 	}
 
 	// @todo : hook bagian lain dari page
@@ -58,7 +50,14 @@ class View {
 	//     add_filter('template_include', array($this, 'override_template'), 10, 1);
 	// }
 
-	function overrideTemplate() {
+	private function overrideTemplate() {
+
+		//Disable rewrite, lighter access for LF
+
+		global $wp_rewrite;
+
+		$wp_rewrite->rules = array();
+
 		return LOTUS_BASE_PATH.'/src/ViewGenerator.php';
 	}
 }
