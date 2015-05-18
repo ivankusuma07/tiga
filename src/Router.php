@@ -6,6 +6,7 @@ use Lotus\Framework\Facade\RequestFacade as Request;
 use Lotus\Framework\Exception\RoutingException as RoutingException;
 use FastRoute\Dispatcher as Dispatcher;
 use FastRoute\RouteCollector as RouteCollector;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class Router {
 
@@ -42,6 +43,7 @@ class Router {
 
     protected function dispatch() {
 
+
     	$routeInfo = $this->dispatcher->dispatch($_SERVER['REQUEST_METHOD'],$this->currentURL);
 
 		switch ($routeInfo[0]) {
@@ -57,6 +59,9 @@ class Router {
 		        break;
 		    case Dispatcher::FOUND:
 
+		    	// Load custom initilization file
+		    	include LOTUS_BASE_PATH."app/app-init.php";
+		        
 		        $handler = $routeInfo[1];
 		        $vars = $routeInfo[2];
 
@@ -64,7 +69,10 @@ class Router {
 		        ob_start();
 		        
 		        // Handle request
-		        $this->handle($handler,$vars);
+		        $response = $this->handle($handler,$vars);
+
+		        if($response instanceof SymfonyResponse)
+		        	$response->send();
 		        
 		        //Transfer buffer to view
 		        $content = ob_get_contents();
@@ -82,15 +90,13 @@ class Router {
 
     protected function handle($handler,$vars) {
 
-    	if (is_callable($handler))
-        {
+    	if (is_callable($handler)) {
             // The action is an anonymous function, let's execute it.
             call_user_func_array($handler, $vars);
 
             return true;
         }
-        else if (is_string($handler) )
-        {
+        else if (is_string($handler) ) {
 
             //set default method to index
             if(!strpos($handler,'@'))
@@ -119,27 +125,6 @@ class Router {
         }
         
     }
-
-
-	protected function hash($routes) {
-
-	} 
-
-	protected function addWPRewriteRules() {
-
-		$routes = Route::getRouteCollections();
-
-		//@todo : HTTP Method separation
-		//@todo : Rewrite for WP
-
-		// foreach ($rules as $rule) {
-
-		// 	add_rewrite_rule($rule['regex'],$rule['redirect'],'top');
-		// }
-
-	}
-
-
 
 }
 

@@ -12,7 +12,7 @@ add_action('init','lotus_bootstrap');
 
 function lotus_bootstrap() {
 
-	define( 'LOTUS_BASE_PATH', dirname(__FILE__) );
+	define( 'LOTUS_BASE_PATH', dirname(__FILE__)."/" );
 	define( 'LOTUS_BUFFER_CALLBACK','lotus_ob_end' );
 	
 	require "vendor/autoload.php";

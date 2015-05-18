@@ -6,28 +6,29 @@ use Lotus\Framework\Facade\TemplateFacade as Template;
 
 class View {
 	
-	protected $run;
-
-	protected $viewQueues;
-
 	protected $buffer;
 
+	protected $title;
 
-	function __construct($template,$parameter=array()) {
-		
-		// Initilize template system
-		Template::init(LOTUS_VIEW_PATH);
 
+	function __construct() {
+	
 		add_filter('template_include', array($this,'overrideTemplate'),10,1);	
-
-		echo Template::render($template,$parameter);
+	
 	}
 
-	function make($template,$parameter=array()){
-		return new View($template,$parameter);
+	function hookTitle( $title,$sep ) {
+
+		return $this->title;;
+		
 	}
+	
+	function setTitle($title) {
 
+		$this->title = $title;
 
+		add_filter( 'wp_title', array($this,'hookTitle'), 10, 2 );
+	}
 
 	function setBuffer($buffer) {
 		$this->buffer = $buffer;
@@ -38,19 +39,7 @@ class View {
 		return $this->buffer;
 	}
 
-	// @todo : hook bagian lain dari page
-	// add_action('pre_get_posts', array($this, 'edit_query'), 10, 1);
-	// add_action('the_post', array($this, 'set_post_contents'), 10, 1);
-	// add_filter('the_title', array($this, 'get_title'), 10, 2);
-	// add_filter('single_post_title', array($this, 'get_single_post_title'), 10, 2);
-	// add_filter('redirect_canonical', array($this, 'override_redirect'), 10, 2);
-	// add_filter('get_post_metadata', array($this, 'set_post_meta'), 10, 4);
-	// add_filter('post_type_link', array($this, 'override_permalink'), 10, 4);
-	// if ( $this->template ) {
-	//     add_filter('template_include', array($this, 'override_template'), 10, 1);
-	// }
-
-	private function overrideTemplate() {
+	public function overrideTemplate() {
 
 		//Disable rewrite, lighter access for LF
 
@@ -61,3 +50,4 @@ class View {
 		return LOTUS_BASE_PATH.'/src/ViewGenerator.php';
 	}
 }
+

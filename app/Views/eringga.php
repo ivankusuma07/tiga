@@ -39,7 +39,7 @@ get_header(); ?>
 
 						<?php
 
-						View::make("tes.php");
+						Template::render("tes.php");
 
 					?>
 				</div><!-- .entry-content -->
