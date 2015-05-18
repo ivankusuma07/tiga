@@ -220,7 +220,7 @@ Route::get('/db-raw',function(){
 
       echo "<h4>COUNT -> RAW SELECT</h4>";
       $hasile2 = DB::table("{$prefix}usermeta")
-      ->select(DB::raw('COUNT(*) as count'));
+      ->select(DB::raw(' COUNT(*) as count'));
 
       $results = $hasile2->row();
 
@@ -270,6 +270,81 @@ Route::get('/db-bind',function(){
 });
 
 
+Route::get('/db-join',function(){
+  echo "<h4>Join</h4>";
+
+  $join1 = DB::table('wp_posts')
+            ->select(DB::raw('wp_posts.post_title as post_title,wp_users.user_login as user_login'))
+            ->join('wp_users','wp_posts.post_author','=','wp_users.ID',"LEFT OUTER")
+            ->join('wp_postmeta','wp_posts.ID','=','wp_postmeta.post_id',"LEFT OUTER")
+            ->limit(5);
+
+              
+  $result = $join1->get();            
+
+  echo "<p>Compiled Query : {$join1->getCompiledQuery()}</p>";
+
+
+  foreach ($result as $row) {
+    echo "<p>{$row->user_login}|{$row->post_title}</p>";
+  }
+
+  echo "<h4>Join with Raw 2</h4>";
+
+  $join1 = DB::table('wp_posts')
+            ->select(array('wp_posts.post_title,wp_users.user_login'))
+            ->join('wp_users','wp_posts.post_author','=','wp_users.ID',"LEFT OUTER")
+            ->join('wp_postmeta','wp_posts.ID','=','wp_postmeta.post_id',"LEFT OUTER")
+            ->limit(5);
+
+              
+  $result = $join1->get();            
+
+  echo "<p>Compiled Query : {$join1->getCompiledQuery()}</p>";
+
+
+  foreach ($result as $row) {
+    echo "<p>{$row->user_login}|{$row->post_title}</p>";
+  }
+
+  echo "<h4>Join with Raw 3</h4>";
+
+  $join1 = DB::table('wp_posts')
+            ->select(array('wp_posts.post_title,wp_users.user_login'))
+            ->join(DB::raw("
+                LEFT OUTER JOIN wp_users on wp_posts.post_author = wp_users.ID 
+                LEFT OUTER JOIN wp_postmeta on wp_posts.ID = wp_postmeta.post_id 
+              "))
+            ->limit(5);
+
+  $result = $join1->get();            
+
+  echo "<p>Compiled Query : {$join1->getCompiledQuery()}</p>";
+
+
+  foreach ($result as $row) {
+    echo "<p>{$row->user_login}|{$row->post_title}</p>";
+  }
+
+  echo "<h4>Join with Raw 4</h4>";
+
+  $join1 = DB::table('wp_posts')
+            ->select(array('wp_posts.post_title,wp_users.user_login'))
+            ->join(DB::raw("
+                LEFT OUTER JOIN wp_users on wp_posts.post_author = wp_users.ID 
+              "))
+            ->join('wp_postmeta','wp_posts.ID','=','wp_postmeta.post_id',"LEFT OUTER")
+            ->limit(5);
+
+  $result = $join1->get();            
+
+  echo "<p>Compiled Query : {$join1->getCompiledQuery()}</p>";
+
+
+  foreach ($result as $row) {
+    echo "<p>{$row->user_login}|{$row->post_title}</p>";
+  }
+});
 
 Route::get('/halo/php/{kamu:@any}', function($kamu){
 	

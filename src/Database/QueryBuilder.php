@@ -300,7 +300,17 @@ class QueryBuilder implements QueryInterface {
 		return $this;
 	}
 
-	function join($table,$leftColumn,$operator,$rightColumn,$joinType=''){
+	function join($table,$leftColumn='',$operator='=',$rightColumn='',$joinType=''){
+
+		if($table instanceof Raw) {
+			
+			$join['join'] = $table;  
+			$join['raw'] = true; 
+
+			$this->queryCompiler->getQuery()->join($join);;
+
+			return $this;
+		}
 
 
 		$join = array();
@@ -309,6 +319,7 @@ class QueryBuilder implements QueryInterface {
 		$join['operator'] = $operator; 
 		$join['rightColumn'] = $rightColumn; 
 		$join['joinType'] = $joinType; 
+		$join['raw'] = false; 
 
 		$this->queryCompiler->getQuery()->join($join);;
 

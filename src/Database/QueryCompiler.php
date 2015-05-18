@@ -161,24 +161,22 @@ class QueryCompiler {
 		}
 
 
+		foreach ($this->query->getQuerySelect() as $key=>$value) {
 
-		if($this->query->getQuerySelect()[0] instanceof Raw) {
-			$this->queryString = "SELECT {$this->query->getQuerySelect()[0]->getString()} ";
-		}
-		else{
-			foreach ($this->query->getQuerySelect() as $key=>$value) {
+			if($value instanceof Raw)
+				$value = $value->getString();
 
-				if($key==0){
-					$selectString = "$value";
-				}
-				else{
-					$selectString .= ",$value";
-				}
-				
+			if($key==0){
+				$selectString = "$value";
 			}
-
-			$this->queryString = "SELECT $selectString ";
+			else{
+				$selectString .= ",$value";
+			}
+			
 		}
+
+		$this->queryString = "SELECT $selectString";
+		
 	}
 
 	function compileDelete() {
@@ -261,7 +259,11 @@ class QueryCompiler {
 
 		foreach ($this->query->getQueryJoin() as $join) {
 
-			$queryString = "{$join['joinType']} JOIN {$join['table']} on {$join['leftColumn']} {$join['operator']} {$join['rightColumn']}";
+			if($join['raw']==false)
+				$queryString = "{$join['joinType']} JOIN {$join['table']} on {$join['leftColumn']} {$join['operator']} {$join['rightColumn']}";
+
+			else 
+				$queryString = $join['join']->getString();
 
 			$this->queryString = "{$this->queryString} $queryString";
 

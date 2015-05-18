@@ -17,7 +17,6 @@ function lotus_bootstrap() {
 	
 	require "vendor/autoload.php";
 
-	
 	require "app/config/app.php";
 	require "app/bootstrap.php";
 
