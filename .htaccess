@@ -1,0 +1,9 @@
+<FilesMatch ".*\.(php)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "(composer.json|composer.lock)">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

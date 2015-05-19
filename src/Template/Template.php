@@ -36,7 +36,7 @@ class Template
 
 		// Create ready to use H20 Engine
 		$this->engine = new \H2o(null, array(
-		    'cache_dir' => LOTUS_STORAGE,
+		    'cache_dir' => $storage,
 		    'searchpath' => $this->path
 		));
 
@@ -49,9 +49,8 @@ class Template
 
 		//Final Path
 		$finalPath = $this->path.$template;
-
+		
 		$this->engine->loadTemplate($finalPath);
-
 
 		return $this->engine->render($parameter);
 	}
@@ -68,15 +67,13 @@ class Template
 	}
 
 	public function render($template,$parameter=array()) {
+
+
+
 		if(stripos($template,".tpl"))
-
 			return $this->renderH20($template,$parameter);
-
-		else{
-
-			return $this->renderPhp($template,$parameter);
-
-		}
+		
+		return $this->renderPhp($template,$parameter);
 	}
 
 

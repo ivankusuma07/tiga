@@ -348,23 +348,21 @@ Route::get('/db-join',function(){
 
 Route::get('/halo/php/{kamu:@any}', function($kamu){
 	
-	// Response::template('eringga.php',array('name'=>$kamu));
     // Response::json(array('adasd'=>'asdasd'));
     // Response::redirect("http://tonjoo.com");
     // Response::download("/home/todiadiyatmo/htdocs/wp_router/wp-content/plugins/lotus-framework/lotus-framework.php");
 
-    // View::setTitle('Todira');
+    View::setTitle('Todi');
 
-    // Response::template('eringga.php',array('name'=>$kamu));
+    return Response::template('eringga.php',array('name'=>$kamu));
 
-    Session::set('ads','ads');
 
 });
 
 Route::get('/halo/h2o/{kamu:@any}', function($kamu){
 
 
-	Response::view('page.tpl',array(
+	return Response::template('page.tpl',array(
     'users' => array(
         array(
             'username' =>           'peter',
@@ -386,8 +384,8 @@ Route::get('/halo/h2o/{kamu:@any}', function($kamu){
             'tasks' => array(),
             'user_id' =>            4
         )
-    )
-));
+      )
+  ));
 
 });
 
@@ -401,4 +399,80 @@ Route::get('/bench',function(){
 
 Route::get('/haris',function(){
     echo "haris";
+});
+
+Route::get('/session',function(){
+
+  // Destroy Session
+  if(isset($_GET['destroy'])){
+
+    Session::invalidate();
+
+    die();
+
+  }
+
+  echo "<h4>Session</h4>";
+
+  if(isset($_GET['set'])){
+
+    Session::set('name','drag');
+
+    die();
+
+  }
+
+   if(isset($_GET['delete'])){
+
+    Session::set('name','drag');
+
+    Session::remove('name');
+
+  }
+
+  
+
+  echo "<p>has `name` : ". Session::has('name')."</p>";
+
+  echo "<p> name ".Session::get('name')."</p>";
+
+});
+
+Route::get('/flash',function(){
+
+    if(isset($_GET['add'])) {
+      // add flash messages
+      Flash::add(
+          'warning',
+          'Your config file is writable, it should be set read-only'
+      );
+    }
+
+    if(isset($_GET['set'])) {
+      Flash::set(
+          'warning',
+          array(
+            'Your config file is writable, it should be set read-only',
+            'Your second message'
+            )
+      );
+    }
+
+    if(isset($_GET['get'])) {
+      foreach (Flash::all() as $type => $messages) {
+          foreach ($messages as $message) {
+              echo "<p>{$type} - $message</p>"; 
+          }
+      }
+    }
+
+
+    if(isset($_GET['peek'])) {
+      foreach (Flash::peekAll() as $type => $messages) {
+          foreach ($messages as $message) {
+              echo "<p>{$type} - $message</p>"; 
+          }
+      }
+    }
+
 });

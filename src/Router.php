@@ -71,11 +71,14 @@ class Router {
 		        // Handle request
 		        $response = $this->handle($handler,$vars);
 
-		        if($response instanceof SymfonyResponse)
-		        	$response->send();
-		        
+		        if($response instanceof SymfonyResponse){
+		        	$response->sendHeaders();
+		        	$response->sendContent();
+		        }
+
 		        //Transfer buffer to view
 		        $content = ob_get_contents();
+		        
 		        ob_end_clean();
 		      
 
@@ -92,9 +95,9 @@ class Router {
 
     	if (is_callable($handler)) {
             // The action is an anonymous function, let's execute it.
-            call_user_func_array($handler, $vars);
+	        return call_user_func_array($handler, $vars);
 
-            return true;
+           
         }
         else if (is_string($handler) ) {
 
@@ -119,9 +122,8 @@ class Router {
             if(!method_exists($instance, $method))
                 throw new RoutingException("{$class} does'nt have method {$method}");
 
-            call_user_func_array(array($instance, $method), $vars);
+            return call_user_func_array(array($instance, $method), $vars);
 
-            return true;
         }
         
     }

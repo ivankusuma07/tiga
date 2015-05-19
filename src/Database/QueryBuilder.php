@@ -67,6 +67,12 @@ class QueryBuilder implements QueryInterface {
 		return $this->getResult('row');
 	}
 
+	// Alias of row
+	function execute() {
+
+		return $this->row();
+	}
+
 
 	private function getResult($type='row') {
 
@@ -91,7 +97,8 @@ class QueryBuilder implements QueryInterface {
 			return $result;
 		}
 		// Update Delete
-		if(strpos($query, "UPDATE") !== false || strpos($query, "DELETE") !== false ) {
+		if(strpos($query, "UPDATE") !== false || strpos($query, "DELETE") !== false 
+			|| strpos($query, "DROP") !== false || strpos($query, "CREATE") !== false) {
 			if($result!==false)
 				return $this->connection->getRowsAffected();
 
@@ -168,12 +175,6 @@ class QueryBuilder implements QueryInterface {
 		return $result->count;
 	}
 
-
-	// Alias of get row
-	function execute() {
-
-		return $this->getRow($query);
-	}
 
 	/*  
 	 * Implement Query Interface

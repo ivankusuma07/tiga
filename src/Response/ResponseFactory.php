@@ -12,11 +12,11 @@ class ResponseFactory {
 		return new Response($content,$status,$headers);	
 	}
 
-	public function template($template,$parameter=array(),$headers=array()) {
+	public function template($template,$parameter=array(),$status=200,$headers=array()) {
 
 		$content = Template::render($template,$parameter);
 
-		return new Response($content,200,$headers);
+		return new Response($content,$status,$headers);
 
 	}
 

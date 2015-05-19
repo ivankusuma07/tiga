@@ -14,40 +14,54 @@ class WPSessionHandler implements \SessionHandlerInterface {
 	var $lifetimeCol;
 	var $timeCol;
 
+    /**
+     * @var bool Whether gc() has been called
+     */
+    private $gcCalled = false;
+
+    /**
+     * @var bool True when the current session exists but expired according to session.gc_maxlifetime
+     */
+    private $sessionExpired = false;
+
 
 	function __construct() {
 
-        $this->table = DB::prefix()."lf_session";
+        global $wpdb;
+
+        $this->table = $wpdb->prefix."tiga_session";
         $this->idCol = "sess_id";
         $this->dataCol = "sess_data";
-        $this->lifetimeCol = "sess_time";
-        $this->timeCol = "sess_lifetime";
+        $this->timeCol = "sess_time";
+        $this->lifetimeCol = "sess_lifetime";
 
         // Create session table
         $this->initTable();
-        
-        $this->write(2,2);
-
+  
 	}
 
     function initTable() {
 
         // If table not exist ,create the table
-        $tableExist = DB::execute("SHOW TABLES LIKE '{$this->table}'");
+        $tableExist = DB::query("SHOW TABLES LIKE '{$this->table}'")->execute();
 
         if(!$tableExist) {
-            $result = DB::execute("CREATE TABLE `$this->table` (
-                `{$this->idCol}` VARBINARY(128) NOT NULL PRIMARY KEY,
-                `{$this->dataCol}` BLOB NOT NULL,
-                `{$this->colSess_time}` INTEGER UNSIGNED NOT NULL,
-                `{$this->timeCol}` MEDIUMINT NOT NULL
-            ) COLLATE utf8_bin, ENGINE = InnoDB;");
 
-            $tableExist = DB::execute("SHOW TABLES LIKE '{$this->tableName}'");
+            $sql = "CREATE TABLE `$this->table` (
+                            `{$this->idCol}` VARBINARY(128) NOT NULL PRIMARY KEY,
+                            `{$this->dataCol}` BLOB NOT NULL,
+                            `{$this->lifetimeCol}` INTEGER UNSIGNED NOT NULL,
+                            `{$this->timeCol}` MEDIUMINT NOT NULL
+                            ) COLLATE utf8_bin, ENGINE = InnoDB;";
+
+            $result = DB::query($sql)->execute();
+
+            $tableExist = DB::query("SHOW TABLES LIKE '{$this->table}'")->execute();
 
             // Check table creation result, if not throw error
             if(!$tableExist)
                 throw new DatabaseException('Fail to create database session table');
+
         }
 
     }
@@ -77,6 +91,21 @@ class WPSessionHandler implements \SessionHandlerInterface {
      */
     public function close() {
 
+        if ($this->gcCalled) {
+
+            $this->gcCalled = false;
+
+            // delete the session records that have expired
+            $sql = "DELETE FROM $this->table WHERE $this->lifetimeCol + $this->timeCol < :time";
+
+            $stmt = DB::query($sql)
+                        ->bindValue(':time', time())
+                        ->execute();
+
+        }
+
+        return true;
+
     }
 
     /**
@@ -90,12 +119,28 @@ class WPSessionHandler implements \SessionHandlerInterface {
      */
     public function read($sessionId) {
 
-        $selectSql = $this->getSelectSql();
-        $selectStmt = $this->pdo->prepare($selectSql);
-        $selectStmt->bindParam(':id', $sessionId, \PDO::PARAM_STR);
-        $selectStmt->execute();
+        $this->sessionExpired = false;
 
-        $sessionRows = $selectStmt->fetchAll(\PDO::FETCH_NUM);
+        $selectSql = $this->getSelectSql();
+        $selectStmt = DB::query($selectSql)
+                        ->bind(':id', $sessionId);
+        
+        $sessionRows = $selectStmt->row();
+
+        if ($sessionRows) {
+
+            if ($sessionRows->{$this->timeCol} + $sessionRows->{$this->lifetimeCol} < time()) {
+
+                $this->sessionExpired = true;
+
+                return '';
+            }
+
+
+            return is_resource($sessionRows->{$this->dataCol}) ? stream_get_contents($sessionRows->{$this->dataCol}) : $sessionRows->{$this->dataCol};
+        }
+
+        return '';
 
     }
 
@@ -116,27 +161,22 @@ class WPSessionHandler implements \SessionHandlerInterface {
 
         $maxlifetime = (int) ini_get('session.gc_maxlifetime');
 
-        $mergeSql = $this->mergeSql();
+        $mergeSql = $this->getMergeSQL();
 
-        DB::prepare($mergeSql);
-        
-        DB::bind(':id', $sessionId);
-        DB::bind(':data', $data);
-        DB::bind(':lifetime',$maxlifetime);
-        DB::bind(':time',time());
+        $result = DB::query($mergeSql)
+            ->bind(':id', $sessionId)
+            ->bind(':data', $data)
+            ->bind(':lifetime',$maxlifetime)
+            ->bind(':time',time())
+            ->execute();
 
-        DB::execute();
 
-        //Clean ?
+        if($result!==false)
+            return true;
 
-        DB::prepare('asdsad ? adsasd');
-
-        DB::bind('todi');
-
-        DB::bind(array('todi','asdas','adads')) ;
-
-        return true;
-   
+        // Session Save faile
+        throw new DatabaseException('Fail to save session to database');
+ 
     }
 
     /**
@@ -150,6 +190,19 @@ class WPSessionHandler implements \SessionHandlerInterface {
      */
     public function destroy($sessionId) {
 
+        // delete the record associated with this id
+        $sql = "DELETE FROM $this->table WHERE $this->idCol = :id";
+
+        
+        $stmt = DB::query($sql)
+                    ->bind(':id', $sessionId)
+                    ->execute();
+        
+        if($stmt===false) 
+            throw new DatabaseException('Fail destroy session');
+
+        return true;
+    
     }
 
     /**
@@ -162,14 +215,23 @@ class WPSessionHandler implements \SessionHandlerInterface {
      * @return bool true on success, false on failure
      */
     public function gc($maxlifetime) {
+        $this->gcCalled = true;
 
+        return true;
     }
 
-    public function mergeSQL() {
+    private function getMergeSQL() {
+
        return "INSERT INTO $this->table ($this->idCol, $this->dataCol, $this->lifetimeCol, $this->timeCol) 
                VALUES (:id, :data, :lifetime, :time) ".
                "ON DUPLICATE KEY UPDATE $this->dataCol = VALUES($this->dataCol), $this->lifetimeCol = VALUES($this->lifetimeCol), $this->timeCol = VALUES($this->timeCol)";
        
+    }
+
+    private function getSelectSQL() {
+        
+        return "SELECT $this->dataCol, $this->lifetimeCol, $this->timeCol FROM $this->table WHERE $this->idCol = :id";
+    
     }
 
 }

@@ -44,13 +44,10 @@ class QueryCompiler {
 
 			return;			
 		}
-		if($query instanceof string) {
 
-			$this->rawQuery = true;
-			$this->queryString = $query ;
-		}
-
-
+		$this->rawQuery = true;
+		$this->queryString = $query ;
+	
 
 	}
 

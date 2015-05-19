@@ -1,6 +1,7 @@
 <?php
 namespace Lotus\Framework\Database;
 use Lotus\Framework\Database\Contract\ConnectionInterface as ConnectionInterface;
+use Lotus\Framework\Exception\DatabaseException as DatabaseException;
 
 class WPDBConnection implements ConnectionInterface {
 
@@ -20,11 +21,22 @@ class WPDBConnection implements ConnectionInterface {
 
 	function getRow($query) {
 		
-		return $this->wpdb->get_row($query,$this->resultType);
+		$result  =  $this->wpdb->get_row($query,$this->resultType);
+
+		if($this->wpdb->last_error!=='')
+			throw new DatabaseException($this->wpdb->last_error);
+
+		return $result;
 	}
 
 	function getResult($query) {
-		return $this->wpdb->get_results($query,$this->resultType);
+		$result =  $this->wpdb->get_results($query,$this->resultType);
+
+		if($this->wpdb->last_error!=='')
+			throw new DatabaseException($this->wpdb->last_error);
+			
+
+		return $result;
 	}
 
 	function quote($string) {
