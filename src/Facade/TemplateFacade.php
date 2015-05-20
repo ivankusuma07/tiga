@@ -1,7 +1,7 @@
 <?php
-namespace Lotus\Framework\Facade;
+namespace Tiga\Framework\Facade;
 
-use Lotus\Framework\Facade\Facade as Facade;
+use Tiga\Framework\Facade\Facade as Facade;
 
 class TemplateFacade extends Facade{
     /**

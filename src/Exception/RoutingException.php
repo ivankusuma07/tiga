@@ -1,3 +1,3 @@
-<?php namespace Lotus\Framework\Exception;
+<?php namespace Tiga\Framework\Exception;
 
 class RoutingException extends \Exception {}

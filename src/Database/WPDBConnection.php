@@ -1,7 +1,7 @@
 <?php
-namespace Lotus\Framework\Database;
-use Lotus\Framework\Database\Contract\ConnectionInterface as ConnectionInterface;
-use Lotus\Framework\Exception\DatabaseException as DatabaseException;
+namespace Tiga\Framework\Database;
+use Tiga\Framework\Contract\ConnectionInterface as ConnectionInterface;
+use Tiga\Framework\Exception\DatabaseException as DatabaseException;
 
 class WPDBConnection implements ConnectionInterface {
 

@@ -1,8 +1,8 @@
 <?php
 
 // Preparing mandatory instance
-$Router = new Lotus\Framework\Router();
-$Routes = new Lotus\Framework\Routes();
+$Router = new Tiga\Framework\Router();
+$Routes = new Tiga\Framework\Routes();
 
 $app['router'] = $Router;
 $app['routes'] = $Routes;
@@ -11,35 +11,35 @@ $app['app'] = $app;
 
 // Preparing on demand instance
 $app->share('request',function(){
-	return Lotus\Framework\Request::createFromGlobals();
+	return Tiga\Framework\Request::createFromGlobals();
 });
 
 $app->share('view',function(){
-	return new Lotus\Framework\View();
+	return new Tiga\Framework\View();
 });
 
 $app->share('template',function(){
 	
-	return new Lotus\Framework\Template\Template(LOTUS_VIEW_PATH);
+	return new Tiga\Framework\Template\Template(TIGA_VIEW_PATH);
 });
 
 $app->share('responseFactory',function(){
-	return new Lotus\Framework\Response\ResponseFactory();
+	return new Tiga\Framework\Response\ResponseFactory();
 });
 
 $app->bind('db',function(){
 
-	$connection = new Lotus\Framework\Database\WPDBConnection();
+	$connection = new Tiga\Framework\Database\WPDBConnection();
 
-	$queryCompiler = new Lotus\Framework\Database\QueryCompiler($connection);
+	$queryCompiler = new Tiga\Framework\Database\QueryCompiler($connection);
 
-	return new Lotus\Framework\Database\QueryBuilder($queryCompiler,$connection);
+	return new Tiga\Framework\Database\QueryBuilder($queryCompiler,$connection);
 
 });
 
 $app->share('session',function(){
 
-	$storage = new Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage(array(), new Lotus\Framework\Session\WPSessionHandler());
+	$storage = new Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage(array(), new Tiga\Framework\Session\WPSessionHandler());
 	$session = new Symfony\Component\HttpFoundation\Session\Session($storage);
 
 	$session->start();
@@ -49,26 +49,26 @@ $app->share('session',function(){
 
 $app->share('flash',function(){
 
-	return new Lotus\Framework\Session\Flash();
+	return new Tiga\Framework\Session\Flash();
 });
 
 // Configure class alias for easy access
 $alias = array();
 
-$alias['Router'] = 'Lotus\Framework\Facade\RouterFacade';
-$alias['Route'] = 'Lotus\Framework\Facade\RoutesFacade';
-$alias['Request'] = 'Lotus\Framework\Facade\RequestFacade';
-$alias['App'] = 'Lotus\Framework\Facade\ApplicationFacade';
-$alias['View'] = 'Lotus\Framework\Facade\ViewFacade';
-$alias['Template'] = 'Lotus\Framework\Facade\TemplateFacade';
-$alias['Response'] = 'Lotus\Framework\Facade\ResponseFactoryFacade';
-$alias['DB'] = 'Lotus\Framework\Facade\DatabaseFacade';
-$alias['Session'] = 'Lotus\Framework\Facade\SessionFacade';
-$alias['Flash'] = 'Lotus\Framework\Facade\FlashFacade';
+$alias['Router'] = 'Tiga\Framework\Facade\RouterFacade';
+$alias['Route'] = 'Tiga\Framework\Facade\RoutesFacade';
+$alias['Request'] = 'Tiga\Framework\Facade\RequestFacade';
+$alias['App'] = 'Tiga\Framework\Facade\ApplicationFacade';
+$alias['View'] = 'Tiga\Framework\Facade\ViewFacade';
+$alias['Template'] = 'Tiga\Framework\Facade\TemplateFacade';
+$alias['Response'] = 'Tiga\Framework\Facade\ResponseFactoryFacade';
+$alias['DB'] = 'Tiga\Framework\Facade\DatabaseFacade';
+$alias['Session'] = 'Tiga\Framework\Facade\SessionFacade';
+$alias['Flash'] = 'Tiga\Framework\Facade\FlashFacade';
 
 
 // Facade the instance
-$aliasMapper = Lotus\Almari\AliasMapper::getInstance();
+$aliasMapper = Tonjoo\Almari\AliasMapper::getInstance();
 
 //Register Facade class alias
 $aliasMapper->facadeClassAlias($alias);

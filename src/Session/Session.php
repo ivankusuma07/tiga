@@ -1,10 +1,10 @@
 <?php
 
-namespace Lotus\Framework\Session;
+namespace Tiga\Framework\Session;
 
 use Symfony\Component\HttpFoundation\Session\Session as SymfonySession;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use Lotus\Framework\Session\WPSessionHandler;
+use Tiga\Framework\Session\WPSessionHandler;
 
 class Session extends SymfonySession{
 

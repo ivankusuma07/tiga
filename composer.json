@@ -1,7 +1,7 @@
 {
-    "name": "Lotus Framework",
+    "name": "Tiga Framework",
     "description": "WordPress Faux MVC",
-    "keywords": ["lotus", "framework","wordpress","mvc","faux mvc"],
+    "keywords": ["tiga", "framework","wordpress","mvc","faux mvc"],
     "license": "MIT",
     "homepage": "http://tonjoo.com",
     "authors": [
@@ -14,14 +14,14 @@
     {
         "nikic/fast-route": "0.4.*",
         "symfony/http-foundation":"2.*",
-        "tonjoo/almari":"*",
+        "tonjoo/almari":"0.9.5",
         "filp/whoops": "1.*"
     },
     "autoload": 
     {
         "psr-4": 
         { 
-             "Lotus\\Framework\\": "src/"
+             "Tiga\\Framework\\": "src/"
         },
         "classmap": 
         [

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lotus\Framework\Database;
-use Lotus\Framework\Database\Contract\QueryInterface as QueryInterface;
-use Lotus\Framework\Database\Contract\QueryCompilerInterface as QueryCompilerInterface;
-use Lotus\Framework\Database\Raw as Raw;
+namespace Tiga\Framework\Database;
+use Tiga\Framework\Contract\QueryInterface as QueryInterface;
+use Tiga\Framework\Contract\QueryCompilerInterface as QueryCompilerInterface;
+use Tiga\Framework\Database\Raw as Raw;
 
 class QueryBuilder implements QueryInterface {
 

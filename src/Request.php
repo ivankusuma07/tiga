@@ -1,6 +1,6 @@
 <?php
 
-namespace Lotus\Framework;
+namespace Tiga\Framework;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 class Request extends SymfonyRequest {

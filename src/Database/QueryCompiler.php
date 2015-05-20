@@ -1,6 +1,6 @@
 <?php
-namespace Lotus\Framework\Database;
-use Lotus\Framework\Database\Raw as Raw;
+namespace Tiga\Framework\Database;
+use Tiga\Framework\Database\Raw as Raw;
 
 class QueryCompiler {
 

@@ -1,12 +1,12 @@
 <?php
 
-$app = new  Lotus\Framework\App();	
+$app = new  Tiga\Framework\App();	
 
 //Load service provider
-include LOTUS_BASE_PATH."app/config/service-provider.php";
+include TIGA_BASE_PATH."app/config/service-provider.php";
 
 // Load Whoops Only in Debug Mode
-if(LOTUS_DEBUG==true) {
+if(TIGA_DEBUG==true) {
 	// @todo Load Whoops only in debug mode 
 	$whoops = new Whoops\Run();
 	$whoops->pushHandler(new Whoops\Handler\PrettyPageHandler());
@@ -15,7 +15,7 @@ if(LOTUS_DEBUG==true) {
 	$whoops->register();  
 }
 
-Lotus\Framework\Facade\Facade::setFacadeContainer($app);
+Tiga\Framework\Facade\Facade::setFacadeContainer($app);
 
 //Prepare the routes !
-include LOTUS_BASE_PATH."app/routes.php";
+include TIGA_BASE_PATH."app/routes.php";

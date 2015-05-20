@@ -1,6 +1,6 @@
 <?php
 
-define('LOTUS_DEBUG',TRUE);
-define('LOTUS_STORAGE',LOTUS_BASE_PATH.'/app/storage/');
-define('LOTUS_VIEW_PATH',LOTUS_BASE_PATH.'/app/Views/');
+define('TIGA_DEBUG',TRUE);
+define('TIGA_STORAGE',TIGA_BASE_PATH.'/app/storage/');
+define('TIGA_VIEW_PATH',TIGA_BASE_PATH.'/app/Views/');
 define('TIGA_ASSETS','assets');

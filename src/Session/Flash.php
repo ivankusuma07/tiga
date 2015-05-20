@@ -1,7 +1,7 @@
 <?php
 
-namespace Lotus\Framework\Session;
-use Lotus\Framework\Facade\SessionFacade as Session;
+namespace Tiga\Framework\Session;
+use Tiga\Framework\Facade\SessionFacade as Session;
 
 class Flash {
 

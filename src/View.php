@@ -1,7 +1,7 @@
 <?php
 
-namespace Lotus\Framework;
-use Lotus\Framework\Facade\TemplateFacade as Template;
+namespace Tiga\Framework;
+use Tiga\Framework\Facade\TemplateFacade as Template;
 
 
 class View {
@@ -47,7 +47,7 @@ class View {
 
 		$wp_rewrite->rules = array();
 
-		return LOTUS_BASE_PATH.'/src/ViewGenerator.php';
+		return TIGA_BASE_PATH.'/src/ViewGenerator.php';
 	}
 }
 

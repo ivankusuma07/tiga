@@ -1,7 +1,7 @@
 <?php
-namespace Lotus\Framework\Database;
-use Lotus\Framework\Database\Contract\QueryInterface as QueryInterface;
-use Lotus\Exception\QueryExcepton as QueryExcepton;
+namespace Tiga\Framework\Database;
+use Tiga\Framework\Contract\QueryInterface as QueryInterface;
+use Tiga\Exception\QueryExcepton as QueryExcepton;
 
 class Query  {
 

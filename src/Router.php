@@ -1,9 +1,9 @@
 <?php
-namespace Lotus\Framework;
-use Lotus\Framework\Facade\RoutesFacade as Route;
-use Lotus\Framework\Facade\ViewFacade as View;
-use Lotus\Framework\Facade\RequestFacade as Request;
-use Lotus\Framework\Exception\RoutingException as RoutingException;
+namespace Tiga\Framework;
+use Tiga\Framework\Facade\RoutesFacade as Route;
+use Tiga\Framework\Facade\ViewFacade as View;
+use Tiga\Framework\Facade\RequestFacade as Request;
+use Tiga\Framework\Exception\RoutingException as RoutingException;
 use FastRoute\Dispatcher as Dispatcher;
 use FastRoute\RouteCollector as RouteCollector;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
@@ -60,7 +60,7 @@ class Router {
 		    case Dispatcher::FOUND:
 
 		    	// Load custom initilization file
-		    	include LOTUS_BASE_PATH."app/app-init.php";
+		    	include TIGA_BASE_PATH."app/app-init.php";
 		        
 		        $handler = $routeInfo[1];
 		        $vars = $routeInfo[2];
@@ -84,7 +84,7 @@ class Router {
 
 		        View::setBuffer($content);
 
-		        // Exit WordPress or not to exist after Lotus finish executing
+		        // Exit WordPress or not to exist after Tiga finish executing
 		        
 		        break;
 		}

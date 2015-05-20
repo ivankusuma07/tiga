@@ -1,5 +1,5 @@
 <?php
-namespace Lotus\Framework\Database;
+namespace Tiga\Framework\Database;
 
 class Raw {
 

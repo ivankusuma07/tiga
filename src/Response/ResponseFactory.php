@@ -1,9 +1,9 @@
 <?php
 
-namespace Lotus\Framework\Response;
+namespace Tiga\Framework\Response;
 use Symfony\Component\HttpFoundation\Response as Response;
 use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponse;
-use Lotus\Framework\Facade\TemplateFacade as Template;
+use Tiga\Framework\Facade\TemplateFacade as Template;
 
 class ResponseFactory {
 

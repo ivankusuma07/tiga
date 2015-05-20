@@ -1,5 +1,5 @@
 <?php
-namespace Lotus\Framework\Facade;
+namespace Tiga\Framework\Facade;
 
 abstract class Facade {
 

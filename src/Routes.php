@@ -1,7 +1,7 @@
 <?php 
-namespace Lotus\Framework;
+namespace Tiga\Framework;
 
-use Lotus\Framework\Route as Route;
+use Tiga\Framework\Route as Route;
 
 class Routes
 {
@@ -101,7 +101,7 @@ class Routes
      */
     protected function register($method, $route, $handler)
     {
-        // Protect / route being used by lotus framework
+        // Protect / route being used by tiga framework
         if($route=="/")
             return;
 

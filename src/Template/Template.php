@@ -1,9 +1,9 @@
 <?php 
-namespace Lotus\Framework\Template;
+namespace Tiga\Framework\Template;
 
 include "h2o.php";
 
-use Lotus\Framework\Facade\ApplicationFacade as App;
+use Tiga\Framework\Facade\ApplicationFacade as App;
 
 class Template 
 {
@@ -23,7 +23,7 @@ class Template
 			return;
 
 		// Configure H20 cache folder
-		$storage = LOTUS_STORAGE;
+		$storage = TIGA_STORAGE;
 
 		if(!file_exists($storage))
 			throw new \Exception("Storage folder on {$storage} does not exist");

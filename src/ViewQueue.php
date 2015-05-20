@@ -1,6 +1,6 @@
 <?php
 
-namespace Lotus\Framework;
+namespace Tiga\Framework;
 
 class ViewQueue {
 	

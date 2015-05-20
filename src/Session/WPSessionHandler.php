@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lotus\Framework\Session;
+namespace Tiga\Framework\Session;
 
-use Lotus\Framework\Facade\DatabaseFacade as DB;
-use Lotus\Framework\Exception\DatabaseException as DatabaseException;
+use Tiga\Framework\Facade\DatabaseFacade as DB;
+use Tiga\Framework\Exception\DatabaseException as DatabaseException;
 
 class WPSessionHandler implements \SessionHandlerInterface {
 

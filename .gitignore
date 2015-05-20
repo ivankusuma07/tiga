@@ -1,3 +1,4 @@
 vendor/
 composer.lock
 app/storage/*
+app/config/config.php

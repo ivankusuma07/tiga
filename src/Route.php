@@ -1,30 +1,27 @@
 <?php 
 
-namespace Lotus\Framework;
+namespace Tiga\Framework;
 
 class Route{
 
 	/**
 	 * Method of the request
 	 */
-
 	private $method;
 
 	/**
 	 * Route 
 	 */
-
 	private $route;
-
 	/**
 	 * Handler
 	 */
 
 	private $handler;
-
     /**
      * Run Level
      */
+    
     private $runLevel;
 
 

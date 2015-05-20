@@ -394,7 +394,7 @@ Route::get('/halo/php/{kamu:@any}', function($kamu){
 	
     // Response::json(array('adasd'=>'asdasd'));
     // Response::redirect("http://tonjoo.com");
-    // Response::download("/home/todiadiyatmo/htdocs/wp_router/wp-content/plugins/lotus-framework/lotus-framework.php");
+    // Response::download("/home/todiadiyatmo/htdocs/wp_router/wp-content/plugins/tiga-framework/tiga-framework.php");
 
     View::setTitle('Todi');
 
