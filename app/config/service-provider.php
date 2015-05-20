@@ -11,7 +11,7 @@ $app['app'] = $app;
 
 // Preparing on demand instance
 $app->share('request',function(){
-	return Symfony\Component\HttpFoundation\Request::createFromGlobals();
+	return Lotus\Framework\Request::createFromGlobals();
 });
 
 $app->share('view',function(){

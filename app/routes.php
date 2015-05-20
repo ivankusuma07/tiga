@@ -1,5 +1,49 @@
 <?php
 
+Route::get('/request-form', function(){
+
+    echo "<p>".tiga_asset("todi.css")."</p>";;
+
+    $data = array(
+        'key_get_0'=>'val',
+        'key_get_1'=>'val1',
+        'key_get_2'=>'val2',
+      );
+
+    $urlPost = tiga_url("/request-process",$data);
+
+     echo "<p>{$urlPost}</p>"
+
+  ?>
+
+    <form method='POST' action='<?php echo tiga_url("/request-process",$data)?>'>
+        <input type='text' name='sehat' value=''>
+        <input type='submit'value='Submit'>
+        <input type='hidden' value='valuePost1' name='key1'>
+        <input type='hidden' value='valuePost2' name='key2'>
+        <input type='hidden' value='valuePost3' name='key3'>
+    </form>
+
+  <?php
+});
+
+Route::post('/request-process', function(){
+
+  echo "<p>".Request::input('key1')."</p>";
+  echo "<p>".Request::input('key2')."</p>";
+  echo "<p>".Request::input('key3')."</p>";
+  echo "<p>".Request::input('key_get_0')."</p>";
+  echo "<p>".Request::input('key_get_1')."</p>";
+  echo "<p>".Request::input('key_get_2')."</p>";
+  
+  echo "<p>".Request::has('key_get_2')."</p>";
+  echo "<p>".Request::has('key_get_ss2')."</p>";
+
+
+
+});
+
+
 Route::get('/db', function(){
 
     /*

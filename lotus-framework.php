@@ -17,7 +17,13 @@ function lotus_bootstrap() {
 	
 	require "vendor/autoload.php";
 
-	require "app/config/app.php";
+	require "src/Helper.php";
+
+	if(file_exists(LOTUS_BASE_PATH.'app/config/app.php'))
+		require "app/config/app.php";
+	else
+		require "app/config/app-sample.php";
+
 	require "app/bootstrap.php";
 
 	Router::init();
