@@ -4,6 +4,7 @@ namespace Tiga\Framework\Response;
 use Symfony\Component\HttpFoundation\Response as Response;
 use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponse;
 use Tiga\Framework\Facade\TemplateFacade as Template;
+use Tiga\Framework\Facade\ViewFacade as View;
 
 class ResponseFactory {
 
@@ -14,9 +15,9 @@ class ResponseFactory {
 
 	public function template($template,$parameter=array(),$status=200,$headers=array()) {
 
-		$content = Template::render($template,$parameter);
+		View::setTemplate($template,$parameter);
 
-		return new Response($content,$status,$headers);
+		return new Response('',$status,$headers);
 
 	}
 

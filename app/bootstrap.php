@@ -1,21 +1,27 @@
 <?php
+define( 'TIGA_BASE_PATH', dirname(__FILE__)."/../" );
 
-$app = new  Tiga\Framework\App();	
+require TIGA_BASE_PATH."vendor/autoload.php";
+
+require TIGA_BASE_PATH."src/Helper.php";
+
+if(file_exists(TIGA_BASE_PATH.'app/config/app.php'))
+	require TIGA_BASE_PATH."app/config/app.php";
+else
+	require TIGA_BASE_PATH."app/config/app-sample.php";
+
+$app = new Tiga\Framework\App();	
+
+Tiga\Framework\Facade\Facade::setFacadeContainer($app);
+
+$app['version'] = '0.1';
 
 //Load service provider
 include TIGA_BASE_PATH."app/config/service-provider.php";
 
-// Load Whoops Only in Debug Mode
-if(TIGA_DEBUG==true) {
-	// @todo Load Whoops only in debug mode 
-	$whoops = new Whoops\Run();
-	$whoops->pushHandler(new Whoops\Handler\PrettyPageHandler());
-	 
-	// Set Whoops as the default error and exception handler used by PHP:
-	$whoops->register();  
-}
 
-Tiga\Framework\Facade\Facade::setFacadeContainer($app);
 
 //Prepare the routes !
 include TIGA_BASE_PATH."app/routes.php";
+
+return $app;

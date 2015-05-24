@@ -1,6 +1,6 @@
 <?php
 
-// Preparing mandatory instance
+// Preparing Routes and Router instance
 $Router = new Tiga\Framework\Router();
 $Routes = new Tiga\Framework\Routes();
 
@@ -20,7 +20,12 @@ $app->share('view',function(){
 
 $app->share('template',function(){
 	
-	return new Tiga\Framework\Template\Template(TIGA_VIEW_PATH);
+
+	$config['path'] = TIGA_VIEW_PATH;
+	$config['storage'] = TIGA_STORAGE;
+
+
+	return new Tiga\Framework\Template\Template($config);
 });
 
 $app->share('responseFactory',function(){
@@ -37,20 +42,22 @@ $app->bind('db',function(){
 
 });
 
-$app->share('session',function(){
+// Validation
+$app->bind('validator',function(){
 
-	$storage = new Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage(array(), new Tiga\Framework\Session\WPSessionHandler());
-	$session = new Symfony\Component\HttpFoundation\Session\Session($storage);
+	return new Tiga\Framework\Validator();
 
-	$session->start();
-
-	return $session;
 });
 
-$app->share('flash',function(){
+// Initializing Session
+$storage = new Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage(array(), new Tiga\Framework\Session\WPSessionHandler());
+$session = new Symfony\Component\HttpFoundation\Session\Session($storage);
+$session->start();
 
-	return new Tiga\Framework\Session\Flash();
-});
+$app['session'] = $session;
+
+$flash = new Tiga\Framework\Session\Flash();
+$app['flash'] = $session;
 
 // Configure class alias for easy access
 $alias = array();
@@ -65,6 +72,7 @@ $alias['Response'] = 'Tiga\Framework\Facade\ResponseFactoryFacade';
 $alias['DB'] = 'Tiga\Framework\Facade\DatabaseFacade';
 $alias['Session'] = 'Tiga\Framework\Facade\SessionFacade';
 $alias['Flash'] = 'Tiga\Framework\Facade\FlashFacade';
+$alias['Validator'] = 'Tiga\Framework\Facade\ValidatorFacade';
 
 
 // Facade the instance

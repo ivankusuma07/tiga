@@ -60,7 +60,7 @@ class Request extends SymfonyRequest {
 		return array_key_exists($key,$this->input);
 	}
 
-	public function getAll() {
+	public function all() {
 
 		$this->populateInput();
 

@@ -14,7 +14,13 @@ class Flash {
 	}
 
 	function get($key,$defaultValue = array()) {
-		return Session::getFlashBag()->get($key,$defaultValue);
+		
+		$flash = Session::getFlashBag()->get($key,$defaultValue);
+
+		if(sizeof($flash)==1)
+			return $flash[0];
+
+		return $flash;
 	}
 
 	function setAll($attributes) {
@@ -39,6 +45,10 @@ class Flash {
 
 	function keys() {
 		return Session::getFlashBag()->keys();
+	}
+
+	function clear() {
+		return Session::getFlashBag()->clear();
 	}
 
 }

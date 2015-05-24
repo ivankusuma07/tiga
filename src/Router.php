@@ -18,8 +18,8 @@ class Router {
 
 	protected $currentURL;
 
-	function init() {
-
+	function init() 
+	{
 		$this->routes = Route::getRouteCollections();
 		
 		$this->dispatcher = $this->createDispatcher();
@@ -41,12 +41,12 @@ class Router {
         });
     }
 
-    protected function dispatch() {
-
-
+    protected function dispatch() 
+    {
     	$routeInfo = $this->dispatcher->dispatch($_SERVER['REQUEST_METHOD'],$this->currentURL);
 
-		switch ($routeInfo[0]) {
+		switch ($routeInfo[0]) 
+		{
 		    case Dispatcher::NOT_FOUND:
 		        // ... 404 Not Found
 
@@ -73,7 +73,7 @@ class Router {
 
 		        if($response instanceof SymfonyResponse){
 		        	$response->sendHeaders();
-		        	$response->sendContent();
+		        	View::setResponse($response);
 		        }
 
 		        //Transfer buffer to view
@@ -84,22 +84,23 @@ class Router {
 
 		        View::setBuffer($content);
 
-		        // Exit WordPress or not to exist after Tiga finish executing
-		        
+		        // Exit WordPress or not to exist after Tiga finish executing		        
 		        break;
 		}
 
     }
 
-    protected function handle($handler,$vars) {
-
-    	if (is_callable($handler)) {
+    protected function handle($handler,$vars) 
+    {
+    	if (is_callable($handler)) 
+    	{
             // The action is an anonymous function, let's execute it.
 	        return call_user_func_array($handler, $vars);
 
            
         }
-        else if (is_string($handler) ) {
+        else if (is_string($handler) ) 
+        {
 
             //set default method to index
             if(!strpos($handler,'@'))

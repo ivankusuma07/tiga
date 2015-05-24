@@ -50,8 +50,8 @@ class WPSessionHandler implements \SessionHandlerInterface {
             $sql = "CREATE TABLE `$this->table` (
                             `{$this->idCol}` VARBINARY(128) NOT NULL PRIMARY KEY,
                             `{$this->dataCol}` BLOB NOT NULL,
-                            `{$this->lifetimeCol}` INTEGER UNSIGNED NOT NULL,
-                            `{$this->timeCol}` MEDIUMINT NOT NULL
+                            `{$this->lifetimeCol}` MEDIUMINT NOT NULL,
+                            `{$this->timeCol}` INTEGER UNSIGNED NOT NULL
                             ) COLLATE utf8_bin, ENGINE = InnoDB;";
 
             $result = DB::query($sql)->execute();
@@ -119,6 +119,7 @@ class WPSessionHandler implements \SessionHandlerInterface {
      */
     public function read($sessionId) {
 
+
         $this->sessionExpired = false;
 
         $selectSql = $this->getSelectSql();
@@ -127,7 +128,9 @@ class WPSessionHandler implements \SessionHandlerInterface {
         
         $sessionRows = $selectStmt->row();
 
+
         if ($sessionRows) {
+
 
             if ($sessionRows->{$this->timeCol} + $sessionRows->{$this->lifetimeCol} < time()) {
 

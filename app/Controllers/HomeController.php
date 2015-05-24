@@ -13,5 +13,8 @@ class HomeController {
 		View::render('eringga.php',$array('name'=>$name));
 	}
 
+	function index() {
+		
+	}
 
 }

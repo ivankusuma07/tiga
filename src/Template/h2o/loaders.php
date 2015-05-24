@@ -55,7 +55,6 @@ class H2o_File_Loader extends H2o_Loader {
 
 	function get_template_path($search_path, $filename){
 
-
         
         for ($i=0 ; $i < count($search_path) ; $i++) 
         { 

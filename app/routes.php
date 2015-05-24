@@ -1,5 +1,12 @@
 <?php
 
+Route::get('/dashboard/posts','PostController@index');
+Route::get('/dashboard/posts/add','PostController@add');
+Route::post('/dashboard/posts/create','PostController@create');
+Route::get('/dashboard/posts/{id:num}/edit','PostController@edit');
+Route::post('/dashboard/posts/{id:num}/update','PostController@update');
+Route::post('/dashboard/posts/delete','PostController@delete');
+
 Route::get('/request-form', function(){
 
     echo "<p>".tiga_asset("todi.css")."</p>";;
@@ -390,13 +397,13 @@ Route::get('/db-join',function(){
   }
 });
 
-Route::get('/halo/php/{kamu:@any}', function($kamu){
+Route::get('/halo/php/{kamu:any}', function($kamu){
 	
     // Response::json(array('adasd'=>'asdasd'));
     // Response::redirect("http://tonjoo.com");
     // Response::download("/home/todiadiyatmo/htdocs/wp_router/wp-content/plugins/tiga-framework/tiga-framework.php");
 
-    View::setTitle('Todi');
+    Template::setTitle('Todi');
 
     return Response::template('eringga.php',array('name'=>$kamu));
 
@@ -438,7 +445,7 @@ Route::get('/{id:@num}/{name:@any}', 'HomeController@named');
 // Route::get('/db', 'TestController');
 
 Route::get('/bench',function(){
-	View::render('default.php');
+	Template::render('default.php');
 });
 
 Route::get('/haris',function(){
@@ -483,7 +490,7 @@ Route::get('/session',function(){
 });
 
 Route::get('/flash',function(){
-
+    echo "Hi, I'am Flash !";
     if(isset($_GET['add'])) {
       // add flash messages
       Flash::add(
@@ -493,6 +500,7 @@ Route::get('/flash',function(){
     }
 
     if(isset($_GET['set'])) {
+      
       Flash::set(
           'warning',
           array(
@@ -500,14 +508,17 @@ Route::get('/flash',function(){
             'Your second message'
             )
       );
+
     }
 
     if(isset($_GET['get'])) {
+
       foreach (Flash::all() as $type => $messages) {
           foreach ($messages as $message) {
               echo "<p>{$type} - $message</p>"; 
           }
       }
+      
     }
 
 

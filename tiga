@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Bootstrap $app 
+ */
+$app = require __DIR__.'/app/bootstrap.php';
+
+$console = $app->getConsole();
+
+$console->registerCommand(new Tiga\Framework\Console\ControllerCommand());    
+$console->registerCommand(new Tiga\Framework\Console\ModelCommand());    
+
+$console->run();
