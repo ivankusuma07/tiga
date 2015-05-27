@@ -1,5 +1,5 @@
 {
-    "name": "Tiga Framework",
+    "name": "Tiga",
     "description": "WordPress Faux MVC",
     "keywords": ["tiga", "framework","wordpress","mvc","faux mvc"],
     "license": "MIT",
@@ -12,23 +12,17 @@
     ],
     "require": 
     {
-        "nikic/fast-route": "0.4.*",
-        "symfony/http-foundation":"2.*",
-        "tonjoo/almari":"*",
-        "symfony/console": "2.6.*",
-        "symfony/process": "2.*",
-        "filp/whoops": "1.*"
+        "tonjoo/tiga-framework": "*",
     },
     "autoload": 
     {
         "psr-4": 
         { 
-             "Tiga\\Framework\\": "Vendor/tonjoo/tiga/"
+             "Tiga\\Framework\\": "vendor/tonjoo/tiga/src/"
         },
         "classmap": 
         [
             "app\/Controllers",
-            "app\/Libs",
             "app\/Models"
         ]
 
