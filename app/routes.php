@@ -1,13 +1,17 @@
 <?php
+Routes::get('/defer',function(){
+  echo "aku cah telat";die();
+})->defer('wp_head');
 
-Route::get('/dashboard/posts','PostController@index');
-Route::get('/dashboard/posts/add','PostController@add');
-Route::post('/dashboard/posts/create','PostController@create');
-Route::get('/dashboard/posts/{id:num}/edit','PostController@edit');
-Route::post('/dashboard/posts/{id:num}/update','PostController@update');
-Route::post('/dashboard/posts/delete','PostController@delete');
+Routes::get('/dashboard/posts/','PostController@index');
+Routes::get('/dashboard/posts/{pagenum:num?}/','PostController@index');
+Routes::get('/dashboard/posts/add/','PostController@add');
+Routes::post('/dashboard/posts/create/','PostController@create');
+Routes::get('/dashboard/posts/{id:num}/edit/','PostController@edit');
+Routes::post('/dashboard/posts/{id:num}/update/','PostController@update');
+Routes::post('/dashboard/posts/{id:num}/delete/','PostController@delete');
 
-Route::get('/request-form', function(){
+Routes::get('/request-form', function(){
 
     echo "<p>".tiga_asset("todi.css")."</p>";;
 
@@ -23,18 +27,18 @@ Route::get('/request-form', function(){
 
   ?>
 
-    <form method='POST' action='<?php echo tiga_url("/request-process",$data)?>'>
-        <input type='text' name='sehat' value=''>
-        <input type='submit'value='Submit'>
-        <input type='hidden' value='valuePost1' name='key1'>
-        <input type='hidden' value='valuePost2' name='key2'>
-        <input type='hidden' value='valuePost3' name='key3'>
-    </form>
+  <form method='POST' action='<?php echo tiga_url("/request-process",$data)?>'>
+      <input type='text' name='sehat' value=''>
+      <input type='submit'value='Submit'>
+      <input type='hidden' value='valuePost1' name='key1'>
+      <input type='hidden' value='valuePost2' name='key2'>
+      <input type='hidden' value='valuePost3' name='key3'>
+  </form>
 
   <?php
 });
 
-Route::post('/request-process', function(){
+Routes::post('/request-process', function(){
 
   echo "<p>".Request::input('key1')."</p>";
   echo "<p>".Request::input('key2')."</p>";
@@ -51,7 +55,7 @@ Route::post('/request-process', function(){
 });
 
 
-Route::get('/db', function(){
+Routes::get('/db', function(){
 
     /*
      * Select
@@ -111,7 +115,7 @@ Route::get('/db', function(){
       echo "<h4>Test :  Where ID = 1</h4>";
 
       $postWhere = DB::table("{$prefix}posts")
-      ->where("ID",'=',1)
+      ->where("ID",'>=',0)
       ->where("post_author",'=',1);
 
       $where = $postWhere->row();
@@ -158,11 +162,11 @@ Route::get('/db', function(){
       echo "<b>Query : {$limitOffset->getCompiledQuery()}</b>";
 
 
-      echo "<p>Row Count {$limitOffset->count()}</p>";
+      echo "<p>Row Count {$limitOffset->count()}</p>";      
 
 });
 
-Route::get('/db2',function(){
+Routes::get('/db2',function(){
     
       $prefix = DB::getConnection()->getPrefix();    
 
@@ -186,7 +190,7 @@ Route::get('/db2',function(){
 
 });
 
-Route::get('/db-insert',function(){
+Routes::get('/db-insert',function(){
     
       $prefix = DB::getConnection()->getPrefix();    
 
@@ -207,7 +211,7 @@ Route::get('/db-insert',function(){
 
 });
 
-Route::get('/db-update',function(){
+Routes::get('/db-update',function(){
     
       $prefix = DB::getConnection()->getPrefix();    
 
@@ -233,7 +237,7 @@ Route::get('/db-update',function(){
 
 });
 
-Route::get('/db-delete',function(){
+Routes::get('/db-delete',function(){
     
       $prefix = DB::getConnection()->getPrefix();    
 
@@ -253,7 +257,7 @@ Route::get('/db-delete',function(){
 
 });
 
-Route::get('/db-raw',function(){
+Routes::get('/db-raw',function(){
     
       $prefix = DB::getConnection()->getPrefix();    
 
@@ -283,7 +287,7 @@ Route::get('/db-raw',function(){
 
 });
 
-Route::get('/db-bind',function(){
+Routes::get('/db-bind',function(){
     
       $prefix = DB::getConnection()->getPrefix();    
 
@@ -321,7 +325,7 @@ Route::get('/db-bind',function(){
 });
 
 
-Route::get('/db-join',function(){
+Routes::get('/db-join',function(){
   echo "<h4>Join</h4>";
 
   $join1 = DB::table('wp_posts')
@@ -397,20 +401,20 @@ Route::get('/db-join',function(){
   }
 });
 
-Route::get('/halo/php/{kamu:any}', function($kamu){
-	
-    // Response::json(array('adasd'=>'asdasd'));
+Routes::get('/halo/php/{kamu:any}', function($kamu){
+	 
+   // return Response::json(array('adasd'=>'asdasd'));
     // Response::redirect("http://tonjoo.com");
-    // Response::download("/home/todiadiyatmo/htdocs/wp_router/wp-content/plugins/tiga-framework/tiga-framework.php");
+    Response::download("/home/todiadiyatmo/htdocs/wp_router/wp-content/plugins/tiga/tiga-framework.php");
 
-    Template::setTitle('Todi');
+    // Template::setTitle('Todi');
 
-    return Response::template('eringga.php',array('name'=>$kamu));
+    // return Response::template('eringga.php',array('name'=>$kamu));
 
 
 });
 
-Route::get('/halo/h2o/{kamu:@any}', function($kamu){
+Routes::get('/halo/h2o/{kamu:@any}', function($kamu){
 
 
 	return Response::template('page.tpl',array(
@@ -440,19 +444,19 @@ Route::get('/halo/h2o/{kamu:@any}', function($kamu){
 
 });
 
-Route::get('/{id:@num}/{name:@any}', 'HomeController@named');
+Routes::get('/{id:@num}/{name:@any}', 'HomeController@named');
 
-// Route::get('/db', 'TestController');
+// Routes::get('/db', 'TestController');
 
-Route::get('/bench',function(){
+Routes::get('/bench',function(){
 	Template::render('default.php');
 });
 
-Route::get('/haris',function(){
+Routes::get('/haris',function(){
     echo "haris";
 });
 
-Route::get('/session',function(){
+Routes::get('/session',function(){
 
   // Destroy Session
   if(isset($_GET['destroy'])){
@@ -489,7 +493,7 @@ Route::get('/session',function(){
 
 });
 
-Route::get('/flash',function(){
+Routes::get('/flash',function(){
     echo "Hi, I'am Flash !";
     if(isset($_GET['add'])) {
       // add flash messages
@@ -513,7 +517,8 @@ Route::get('/flash',function(){
 
     if(isset($_GET['get'])) {
 
-      foreach (Flash::all() as $type => $messages) {
+
+      foreach (Flash::all() as  $type => $messages) {
           foreach ($messages as $message) {
               echo "<p>{$type} - $message</p>"; 
           }

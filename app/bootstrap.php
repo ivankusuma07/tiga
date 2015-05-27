@@ -1,27 +1,37 @@
 <?php
-define( 'TIGA_BASE_PATH', dirname(__FILE__)."/../" );
+
+define('TIGA_BASE_PATH', dirname(__FILE__)."/../" );
 
 require TIGA_BASE_PATH."vendor/autoload.php";
+require TIGA_BASE_PATH."vendor/tonjoo/tiga/src/Helper.php";
 
-require TIGA_BASE_PATH."src/Helper.php";
+// Add default route 
+add_action('tiga_routes',function()
+{
+	include TIGA_BASE_PATH."app/routes.php";
 
-if(file_exists(TIGA_BASE_PATH.'app/config/app.php'))
-	require TIGA_BASE_PATH."app/config/app.php";
+});
+
+// Add default config
+add_filter('tiga_config',function($configs)
+{
+	$config = include TIGA_BASE_PATH."app/config/app.php";
+
+	return array_merge_recursive($configs,$config);
+});
+
+if(file_exists(TIGA_BASE_PATH."app/config/.env.php"))
+	require TIGA_BASE_PATH."app/config/.env.php";
 else
-	require TIGA_BASE_PATH."app/config/app-sample.php";
+	require TIGA_BASE_PATH."app/config/.env-sample.php";
 
+// Load Tiga Plugin
+do_action('tiga_plugin');
+
+// Setting Container for apps
 $app = new Tiga\Framework\App();	
 
-Tiga\Framework\Facade\Facade::setFacadeContainer($app);
-
+// Setup tiga version
 $app['version'] = '0.1';
-
-//Load service provider
-include TIGA_BASE_PATH."app/config/service-provider.php";
-
-
-
-//Prepare the routes !
-include TIGA_BASE_PATH."app/routes.php";
 
 return $app;

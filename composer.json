@@ -17,14 +17,13 @@
         "tonjoo/almari":"*",
         "symfony/console": "2.6.*",
         "symfony/process": "2.*",
-        "filp/whoops": "1.*",
-        "wixel/gump": "1.*"
+        "filp/whoops": "1.*"
     },
     "autoload": 
     {
         "psr-4": 
         { 
-             "Tiga\\Framework\\": "src/"
+             "Tiga\\Framework\\": "Vendor/tonjoo/tiga/"
         },
         "classmap": 
         [

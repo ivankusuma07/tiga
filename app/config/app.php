@@ -1,6 +1,30 @@
 <?php
 
-define('TIGA_DEBUG',TRUE);
-define('TIGA_STORAGE',TIGA_BASE_PATH.'app/storage/');
-define('TIGA_VIEW_PATH',TIGA_BASE_PATH.'app/Views/');
-define('TIGA_ASSETS','assets');
+return array(
+		'tiga'		=> array(
+			'assets' 	=> 'assets'
+		),
+		'path' 		=> array(
+			'storage'	=> TIGA_BASE_PATH.'app/storage/',
+			'view'		=> array(TIGA_BASE_PATH.'app/Views/'),
+		),
+		'provider' => array(
+			'Tiga\Framework\ServiceProvider\WhoopsServiceProvider',
+			'Tiga\Framework\ServiceProvider\CoreServiceProvider',
+			'Tiga\Framework\ServiceProvider\SessionServiceProvider'
+		),
+		'alias' 	=> array(
+			'Router'	=> 'Tiga\Framework\Facade\RouterFacade',
+			'Routes'	=> 'Tiga\Framework\Facade\RoutesFacade',
+			'Request' 	=> 'Tiga\Framework\Facade\RequestFacade',
+			'App' 		=> 'Tiga\Framework\Facade\ApplicationFacade',
+			'View' 		=> 'Tiga\Framework\Facade\ViewFacade',
+			'Template' 	=> 'Tiga\Framework\Facade\TemplateFacade',
+			'Response' 	=> 'Tiga\Framework\Facade\ResponseFactoryFacade',
+			'DB' 		=> 'Tiga\Framework\Facade\DatabaseFacade',
+			'Session' 	=> 'Tiga\Framework\Facade\SessionFacade',
+			'Flash' 	=> 'Tiga\Framework\Facade\FlashFacade',
+			'Validator' => 'Tiga\Framework\Facade\ValidatorFacade',
+			'Paginate' 	=> 'Tiga\Framework\Facade\PaginationFacade'
+		)
+	); 
