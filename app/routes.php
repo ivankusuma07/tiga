@@ -3,6 +3,11 @@ Routes::get('/defer',function(){
   echo "aku cah telat";die();
 })->defer('wp_head');
 
+
+
+Routes::get('/form/','FormController@index');
+Routes::get('/form/process','FormController@process');
+
 Routes::get('/dashboard/posts/','PostController@index');
 Routes::get('/dashboard/posts/{pagenum:num?}/','PostController@index');
 Routes::get('/dashboard/posts/add/','PostController@add');

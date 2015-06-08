@@ -3,7 +3,6 @@
 define('TIGA_BASE_PATH', dirname(__FILE__)."/../" );
 
 require TIGA_BASE_PATH."vendor/autoload.php";
-require TIGA_BASE_PATH."vendor/tonjoo/tiga/src/Helper.php";
 
 // Add default route 
 add_action('tiga_routes',function()

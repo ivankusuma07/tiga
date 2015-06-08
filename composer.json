@@ -10,16 +10,13 @@
             "homepage": "http://todiadiyatmo.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": 
     {
-        "tonjoo/tiga-framework": "*"
+        "tonjoo/tiga-framework": "dev-master"
     },
     "autoload": 
     {
-        "psr-4": 
-        { 
-             "Tiga\\Framework\\": "vendor/tonjoo/tiga-framework/src/"
-        },
         "classmap": 
         [
             "app\/Controllers",

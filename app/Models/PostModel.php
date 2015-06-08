@@ -20,6 +20,7 @@ class PostModel extends Tiga\Framework\Model {
 	function getAll($offset=0) {
 		return DB::table("{$this->prefix}posts")
 				->where('post_type',"=",'post')
+				->where('post_status',"!=",'auto-draft')
 				->offset($offset)
 				->limit(4)
 				->get();
@@ -28,6 +29,7 @@ class PostModel extends Tiga\Framework\Model {
 	function count() {
 		return DB::table("{$this->prefix}posts")
 				->where('post_type',"=",'post')
+				->where('post_status',"!=",'auto-draft')
 				->count();
 	}
 

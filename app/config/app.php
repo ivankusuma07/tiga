@@ -11,7 +11,8 @@ return array(
 		'provider' => array(
 			'Tiga\Framework\ServiceProvider\WhoopsServiceProvider',
 			'Tiga\Framework\ServiceProvider\CoreServiceProvider',
-			'Tiga\Framework\ServiceProvider\SessionServiceProvider'
+			'Tiga\Framework\ServiceProvider\SessionServiceProvider',
+			'Tiga\Framework\ServiceProvider\FormServiceProvider',			
 		),
 		'alias' 	=> array(
 			'Router'	=> 'Tiga\Framework\Facade\RouterFacade',
@@ -25,6 +26,8 @@ return array(
 			'Session' 	=> 'Tiga\Framework\Facade\SessionFacade',
 			'Flash' 	=> 'Tiga\Framework\Facade\FlashFacade',
 			'Validator' => 'Tiga\Framework\Facade\ValidatorFacade',
-			'Paginate' 	=> 'Tiga\Framework\Facade\PaginationFacade'
+			'Paginate' 	=> 'Tiga\Framework\Facade\PaginationFacade',
+			'Form' 		=> 'Tiga\Framework\Facade\FormFacade',
+			'Html' 		=> 'Tiga\Framework\Facade\HtmlFacade'
 		)
 	); 
