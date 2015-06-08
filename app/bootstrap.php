@@ -4,6 +4,11 @@ define('TIGA_BASE_PATH', dirname(__FILE__)."/../" );
 
 require TIGA_BASE_PATH."vendor/autoload.php";
 
+// Check if function exist
+
+if(!function_exists('add_action'))
+	require TIGA_BASE_PATH."../../../wp-includes/plugin.php";
+
 // Add default route 
 add_action('tiga_routes',function()
 {
@@ -19,18 +24,10 @@ add_filter('tiga_config',function($configs)
 	return array_merge_recursive($configs,$config);
 });
 
+do_action('tiga_plugin');
+
 if(file_exists(TIGA_BASE_PATH."app/config/.env.php"))
 	require TIGA_BASE_PATH."app/config/.env.php";
 else
 	require TIGA_BASE_PATH."app/config/.env-sample.php";
 
-// Load Tiga Plugin
-do_action('tiga_plugin');
-
-// Setting Container for apps
-$app = new Tiga\Framework\App();	
-
-// Setup tiga version
-$app['version'] = '0.1';
-
-return $app;

@@ -2,7 +2,9 @@
 
 return array(
 		'tiga'		=> array(
-			'assets' 	=> 'assets'
+			'assets' 	=> 'assets',
+			'controller'=> TIGA_BASE_PATH.'app/Controllers/',
+			'model'		=> TIGA_BASE_PATH.'app/Models/'
 		),
 		'path' 		=> array(
 			'storage'	=> TIGA_BASE_PATH.'app/storage/',
@@ -28,6 +30,7 @@ return array(
 			'Validator' => 'Tiga\Framework\Facade\ValidatorFacade',
 			'Paginate' 	=> 'Tiga\Framework\Facade\PaginationFacade',
 			'Form' 		=> 'Tiga\Framework\Facade\FormFacade',
-			'Html' 		=> 'Tiga\Framework\Facade\HtmlFacade'
+			'Html' 		=> 'Tiga\Framework\Facade\HtmlFacade',
+			'Config' 		=> 'Tiga\Framework\Facade\ConfigFacade'
 		)
 	); 

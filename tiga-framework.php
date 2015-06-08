@@ -12,7 +12,10 @@ add_action('init','tiga_bootstrap');
 
 function tiga_bootstrap() {
 
-	$app = require __DIR__."/app/bootstrap.php";
+	require __DIR__."/app/bootstrap.php";
+
+	// Setting Container for apps
+	$app = new Tiga\Framework\App();	
 
 	$app->routerInit();
 
