@@ -4,9 +4,13 @@ Routes::get('/defer',function(){
 })->defer('wp_head');
 
 
+Routes::get('/exit',function(){
+  echo "langsung exit";
+})->end();
+
 
 Routes::get('/form/','FormController@index');
-Routes::get('/form/process','FormController@process');
+Routes::post('/form/process','FormController@process');
 
 Routes::get('/dashboard/posts/','PostController@index');
 Routes::get('/dashboard/posts/{pagenum:num?}/','PostController@index');

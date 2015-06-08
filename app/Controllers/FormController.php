@@ -3,6 +3,7 @@
 class FormController {
 
 	function index() {
+
 		Template::setTitle('Form');
 
 		$postModel = new PostModel();
@@ -11,14 +12,16 @@ class FormController {
 		// $postModel->size="M";
 		// $postModel->ck1=array('rahasia 0','rahasia 3');
 
+		// var_dump(Flash::has('_old_input'));die();
+
+		// var_dump(Request::oldInput());
+
 		return Response::template('form/form.php',array('postModel'=>$postModel));
 	}
 
 	function process() {
-		
-		do_action('tiga_check_token');
-
-		echo "Form Testing Old Input";
+			
+		Request::flash();
 
 		return Response::redirect(tiga_url('form'));
 	}

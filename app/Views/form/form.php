@@ -6,7 +6,7 @@
 			<h4>Testing Form</h4>
 			<?php
 				$options = array(
-						'url'=>tiga_url('/form/process'),
+						'action'=>tiga_url('/form/process'),
 						'method'=>'POST'
 					);
 
@@ -44,9 +44,14 @@
 				    'Dogs' => array('spaniel' => 'Spaniel'),
 				));
 				echo "<br>";
-				echo Form::selectRange('number', 10, 20);
+				echo Form::selectRange('number-range', 10, 20);
+				echo "<br>";
+				echo Form::textarea('text-area');
 				echo "<br>";
 				echo Form::selectMonth('month');
+
+				echo Form::wpEditor('wp-editor',"<h1>Todi</h1>");
+				echo "<br>";
 				echo Form::submit('Click Me!');
 				echo Form::close();
 

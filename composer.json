@@ -10,8 +10,7 @@
             "homepage": "http://todiadiyatmo.com"
         }
     ],
-    "minimum-stability": "dev",
-    "require": 
+    "require-dev": 
     {
         "tonjoo/tiga-framework": "dev-master"
     },
