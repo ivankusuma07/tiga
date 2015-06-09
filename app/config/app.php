@@ -14,7 +14,8 @@ return array(
 			'Tiga\Framework\ServiceProvider\WhoopsServiceProvider',
 			'Tiga\Framework\ServiceProvider\CoreServiceProvider',
 			'Tiga\Framework\ServiceProvider\SessionServiceProvider',
-			'Tiga\Framework\ServiceProvider\FormServiceProvider',			
+			'Tiga\Framework\ServiceProvider\FormServiceProvider'			
+			// 'Tiga\Framework\ServiceProvider\AjaxServiceProvider'			
 		),
 		'alias' 	=> array(
 			'Router'	=> 'Tiga\Framework\Facade\RouterFacade',
