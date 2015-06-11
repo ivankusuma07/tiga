@@ -10,5 +10,6 @@ return array(
     'Tiga\\Framework\\' => array($vendorDir . '/tonjoo/tiga-framework/src'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
+    'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
 );

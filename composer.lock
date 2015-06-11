@@ -1,14 +1,15 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cd0c84472376f6c852f2a8e2a80d3cb4",
-    "packages": [
+    "hash": "1698aabe106a0bb168122ed6625d6240",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "filp/whoops",
-            "version": "dev-master",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
@@ -109,21 +110,20 @@
         },
         {
             "name": "symfony/console",
-            "version": "2.6.x-dev",
-            "target-dir": "Symfony/Component/Console",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "6212ef46849c6edb193e8dfd3966e70f4bc1e32b"
+                "reference": "7f0bec04961c61c961df0cb8c2ae88dbfd83f399"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/6212ef46849c6edb193e8dfd3966e70f4bc1e32b",
-                "reference": "6212ef46849c6edb193e8dfd3966e70f4bc1e32b",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/7f0bec04961c61c961df0cb8c2ae88dbfd83f399",
+                "reference": "7f0bec04961c61c961df0cb8c2ae88dbfd83f399",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "psr/log": "~1.0",
@@ -139,11 +139,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\Console\\": ""
                 }
             },
@@ -163,33 +163,33 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-05 13:50:22"
+            "time": "2015-05-29 16:22:24"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "2.8.x-dev",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "bc048f0cb84726b12d75983596eb61f5326c4295"
+                "reference": "729de183da037c125c5f6366bd4f0631ba1a1abb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/bc048f0cb84726b12d75983596eb61f5326c4295",
-                "reference": "bc048f0cb84726b12d75983596eb61f5326c4295",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/729de183da037c125c5f6366bd4f0631ba1a1abb",
+                "reference": "729de183da037c125c5f6366bd4f0631ba1a1abb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
             },
             "require-dev": {
-                "symfony/expression-language": "~2.4|~3.0.0",
-                "symfony/phpunit-bridge": "~2.7|~3.0.0"
+                "symfony/expression-language": "~2.4",
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
@@ -216,32 +216,32 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-04 20:21:09"
+            "time": "2015-05-22 14:54:25"
         },
         {
             "name": "symfony/process",
-            "version": "2.8.x-dev",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "9f29614692809af38fff44bdae7bb90beb9e7086"
+                "reference": "e0a82b58e36afc60f8e79b8bc85a22bb064077c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/9f29614692809af38fff44bdae7bb90beb9e7086",
-                "reference": "9f29614692809af38fff44bdae7bb90beb9e7086",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/e0a82b58e36afc60f8e79b8bc85a22bb064077c1",
+                "reference": "e0a82b58e36afc60f8e79b8bc85a22bb064077c1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "~2.7|~3.0.0"
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
@@ -265,20 +265,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-04 20:21:09"
+            "time": "2015-05-15 13:33:16"
         },
         {
             "name": "tonjoo/almari",
-            "version": "dev-master",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tonjoo/almari.git",
-                "reference": "25da718e48e6af99657e1067c2152f4e555e9e45"
+                "reference": "46cbcf63dab67be544468052b22a325d68c33c79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tonjoo/almari/zipball/25da718e48e6af99657e1067c2152f4e555e9e45",
-                "reference": "25da718e48e6af99657e1067c2152f4e555e9e45",
+                "url": "https://api.github.com/repos/tonjoo/almari/zipball/46cbcf63dab67be544468052b22a325d68c33c79",
+                "reference": "46cbcf63dab67be544468052b22a325d68c33c79",
                 "shasum": ""
             },
             "type": "library",
@@ -305,7 +305,7 @@
                 "ioc",
                 "lotus"
             ],
-            "time": "2015-05-27 23:59:14"
+            "time": "2015-06-06 13:25:37"
         },
         {
             "name": "tonjoo/tiga-framework",
@@ -313,21 +313,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tonjoo/tiga-framework.git",
-                "reference": "55b06379db830f99340c6329f044d8d44176087d"
+                "reference": "c1aa735b78cde494a9f0e875c0fd9538d2c6d449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tonjoo/tiga-framework/zipball/55b06379db830f99340c6329f044d8d44176087d",
-                "reference": "55b06379db830f99340c6329f044d8d44176087d",
+                "url": "https://api.github.com/repos/tonjoo/tiga-framework/zipball/c1aa735b78cde494a9f0e875c0fd9538d2c6d449",
+                "reference": "c1aa735b78cde494a9f0e875c0fd9538d2c6d449",
                 "shasum": ""
             },
             "require": {
                 "filp/whoops": "1.*",
                 "nikic/fast-route": "0.4.*",
-                "symfony/console": "2.6.*",
+                "symfony/console": "2.7.*",
                 "symfony/http-foundation": "2.*",
-                "symfony/process": "2.8.*",
-                "tonjoo/almari": "dev-master"
+                "symfony/process": "2.7.*",
+                "tonjoo/almari": "*"
             },
             "type": "library",
             "autoload": {
@@ -357,12 +357,11 @@
                 "tiga",
                 "wordpress"
             ],
-            "time": "2015-06-06 13:11:47"
+            "time": "2015-06-09 04:28:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
         "tonjoo/tiga-framework": 20
     },
