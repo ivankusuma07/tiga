@@ -32,6 +32,6 @@ return array(
 			'Paginate' 	=> 'Tiga\Framework\Facade\PaginationFacade',
 			'Form' 		=> 'Tiga\Framework\Facade\FormFacade',
 			'Html' 		=> 'Tiga\Framework\Facade\HtmlFacade',
-			'Config' 		=> 'Tiga\Framework\Facade\ConfigFacade'
+			'Config' 	=> 'Tiga\Framework\Facade\ConfigFacade'
 		)
 	); 
