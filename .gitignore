@@ -1,4 +1,2 @@
-vendor/
-composer.lock
 app/storage/*
 app/config/.env.php
