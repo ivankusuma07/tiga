@@ -336,7 +336,7 @@
         },
         "time": "2015-06-09 04:28:00",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "Tiga\\Framework\\": "src/"
