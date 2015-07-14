@@ -21,8 +21,8 @@
 
 		section {
 			position: fixed;
-			top: 25%;
-			bottom: 25%;
+			top: 35%;
+			bottom: 35%;
 			left: 25%;
 			right: 25%;
 			text-align: center;
@@ -38,17 +38,26 @@
 			margin-bottom: 25px;
 		}
 
-		section h1 label {
+		section h1 label a {
 			color: #f55030;
 			text-transform: uppercase;
 			font-weight: 400;
+			padding-left: 20px;
+			padding-right: 20px;
+			text-decoration: none;
 		}
 
-		section h2 {
-			color: #888888;
-			font-family: 'Open Sans', sans-serif;
-			font-size: 1.8em;
-			font-weight: lighter;
+		section h1 label a:hover {
+			padding-left: 20px;
+			padding-right: 20px;
+			color: #fff;
+			text-transform: uppercase;
+			font-weight: 400;
+			background-color: #f55030;
+			border-radius: 2px;
+			-webkit-transition-duration: 1s;
+			transition-duration: 1s;
+			text-decoration: none;
 		}
 
 	</style>
@@ -56,10 +65,14 @@
 	<section>
 		<div class="brand">
 			<h1>
-				Welcome to <label>Tiga</label>
+				Welcome to 
+				<label>
+					<a href="http://tiga.io/" target="_blank">
+						Tiga
+					</a>
+				</label>
 			</h1>
 		</div>
-		<h2>Faux WordPress MVC Framework</h2>
 	</section>
 
 </body>
