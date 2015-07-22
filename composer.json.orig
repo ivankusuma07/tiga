@@ -12,7 +12,11 @@
     ],
     "require-dev": 
     {
+<<<<<<< HEAD
+        "tonjoo/tiga-framework": "0.1.0"
+=======
         "tonjoo/tiga-framework": "0.1.*"
+>>>>>>> upstream/master
     },
     "autoload": 
     {
