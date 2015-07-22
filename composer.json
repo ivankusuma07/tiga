@@ -22,5 +22,16 @@
             "app\/Models"
         ]
 
-    }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "composer dump-autoload"
+        ],
+        "post-update-cmd": [
+            "composer dump-autoload"
+        ],
+        "post-create-project-cmd": [
+            "composer dump-autoload"
+        ]
+    },
 }
