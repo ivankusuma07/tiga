@@ -2,9 +2,10 @@
 
 return array(
 		'tiga'		=> array(
-			'assets' 	=> 'assets',
-			'controller'=> TIGA_BASE_PATH.'app/Controllers/',
-			'model'		=> TIGA_BASE_PATH.'app/Models/'
+			'assets' 		=> 'assets',
+			'controller'		=> TIGA_BASE_PATH.'app/Controllers/',
+			'model'			=> TIGA_BASE_PATH.'app/Models/',
+			'skip_csrf_protect'	=> false  
 		),
 		'path' 		=> array(
 			'storage'	=> TIGA_BASE_PATH.'app/storage/',
